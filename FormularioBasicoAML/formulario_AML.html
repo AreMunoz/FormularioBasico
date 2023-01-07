@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="form.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario</title>
+  <script type="text/javascript">
+    
+   
+    
+    let radio;
+    let datos = [];
+    let checkboxProgra = new Array();
+    let contador = 0;
+
+    function cargar() {
+      let enviar = document.getElementById("enviar");
+     
+      enviar.addEventListener("click", mensaje, false);
+   
+    }
+
+    function mensaje() {
+      let form = document.getElementById("miformulario");
+      if (!form) {
+        alert("No hay cargado ningún formulario");
+      } else {
+        for (let i = 0; i < form.elements.length; i++) {
+          let tipoElemento = form.elements[i].type;
+          let valorElemento = form.elements[i].value;
+
+          if (tipoElemento != "fieldset" && tipoElemento != "button") {
+
+            if (tipoElemento != "radio" && tipoElemento != "checkbox") {
+              datos.push(valorElemento);
+            }
+
+            if (tipoElemento == "radio") {
+              radio = document.getElementsByName(form.elements[i].name);
+            }
+            if (tipoElemento == "checkbox" && form.elements[i].checked) {
+              checkboxProgra.push(valorElemento);
+            }
+
+          }
+        }
+      }
+      mandarInfo();
+    }
+
+ 
+
+
+
+    function mandarInfo() {
+      document.write("<p>Nombre:" + datos[0] + "</p>");
+      document.write("<p>Apellido Paterno:" + datos[1] + "</p>");
+      document.write("<p>Apellido Materno:" + datos[2] + "</p>");
+      document.write("<p>Calle:" + datos[3] + " No." + datos[4] + " Codigo Postal:" + datos[5] + "</p>");
+      document.write("<p>Delegación:" + datos[6] + "</p>");
+      for (let i = 0; i < radio.length; i++) {
+        if (radio[i].checked)
+          document.write("<p>Sexo:" + radio[i].value + "</p>");
+      }
+      document.write("<p>Fecha de Nacimiento</p>");
+      document.write("<p>Mes:" + datos[7] + "</p>");
+      document.write("<p>Día:" + datos[8] + "</p>");
+      document.write("<p>Año:" + datos[9] + "</p>");
+      document.write("<p>CURP:" + datos[10] + "</p>");
+      document.write("<p>Lenguajes y Pasatiempos</p>");
+      for (let i = 0; i < checkboxProgra.length; i++) {
+        document.write("<p>" + checkboxProgra[i] + "</p>");
+      }
+    }
+
+
+    window.addEventListener("load", cargar, false);
+  </script>
+
+
+</head>
+
+<body id="body">
+  <table align="center" class="table1x">
+    <form id="miformulario">
+      <tr>
+        <td>
+          <fieldset class="fi1">
+            <legend class="a1">Nombre</legend>
+            <table>
+              <tr class="trnombre">
+                <td>
+                  <input name="nombre" id="nombre" type="text"><br>
+                  <label for="nombre">Nombre</label>
+                </td>
+                <td>
+                  <input name="AP" id="AP" type="text"> <br>
+                  <label for="AP">Apellido Paterno</label>
+                </td>
+                <td>
+                  <input name="AM" id="AM" type="text" tabindex="3"><br>
+                  <label for="AM">Apellido Materno</label>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <fieldset class="a2">
+            <table>
+              <legend>Dirección</legend>
+              <tr class="trdireccion">
+                <td>
+                  <input type="text" name="calle"><br>
+                  <label for="calle">Calle </label>
+                </td>
+                <td>
+                  <input type="text" name="no"><br>
+                  <label for="no">No.</label>
+                </td>
+                <td>
+                  <input type="text" name="cp"><br>
+                  <label for="cp">CP</label>
+                </td>
+                <td>
+                  <select name="ciudad" id="ciudad">
+                    <option selected>Delegación</option>
+                    <option value="cdmx">Delegaciones</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+      <tr>
+        <td class="tdsexo">
+
+          <label for="rbtn">Sexo:</label>
+          <input type="radio" name="gender" value="Masculino" id="M">
+          <label for="M">Masculino</label>
+          <input type="radio" name="gender" value="Femenino" id="F">
+          <label for="F">Femenino</label>
+          <input type="radio" name="gender" value="Otro" id="O">
+          <label for="O">Otro</label><br><br>
+          <label for="">Fecha de Nacimiento:</label>
+
+
+          <select>
+            <option selected value="0">Mes</option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+          </select>
+          <select>
+            <option selected value="0">Día</option>
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miercoles</option>
+            <option value="4">Jueves</option>
+          </select>
+          <select>
+            <option selected value="0">Año</option>
+            <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+          </select>
+          <br><br>
+          <label for="curp">CURP</label>
+          <input name="curp" id="curp" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <fieldset>
+            <legend>Lenguajes de Programación</legend>
+            <table>
+              <tr>
+                <td>
+                  <input type="checkbox" name="C" class="C" value="C" id="C">
+                  <label for="C">C</label>
+                </td>
+                <td>
+                  <input type="checkbox" name="Ru" class="R" value="Ruby" id="Ru">
+                  <label for="Ru">Ruby</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" name="C++" value="C++" id="C++">
+                  <label for="C++">C++</label>
+                </td>
+                <td>
+                  <input type="checkbox" name="P" value="Perl" id="P">
+                  <label for="P">Perl</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" name="J" value="Java" id="J">
+                  <label for="J">Java</label>
+                </td>
+                <td>
+                  <input type="checkbox" name="R" value="R" id="R">
+                  <label for="R">R</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" name="Py" value="Python" id="Py">
+                  <label for="Py">Python</label>
+                </td>
+                <td>
+                  <input type="checkbox" name="o" value="Otro" id="o">
+                  <label for="o">Otro</label>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <fieldset>
+            <legend>Pasatiempos</legend>
+            <table>
+              <tr>
+                <td>
+                  <input type="checkbox" name="lr" value="Leer" id="lr">
+                  <label for="lr">Leer</label>
+                </td>
+                <td>
+                  <input type="checkbox" name="vd" value="Videojuegos" id="vd">
+                  <label for="vd">Videojuegos</label>
+                </td>
+                <td rowspan="3">
+                  <input type="checkbox" name="OC" value="Otras Cosas" id="OC">
+                  <label for="OC">Otras Cosas</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" name="vd" value="Ver Tv" id="vd">
+                  <label for="vd">Ver TV</label>
+                </td>
+                <td>
+                  <input type="checkbox" name="ic" value="Ir al cine" id="ic">
+                  <label for="ic">Ir al Cine</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" name="nv" value="Navegar en Internet" d="nv">
+                  <label for="nv">Navegar en Internet</label>
+                </td>
+                <td>
+                  <input type="checkbox" name="vN" value="Ver Netflix" id="vN">
+                  <label for="vN">Ver Netflix</label>
+                </td>
+              </tr>
+
+            </table>
+          </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <fieldset>
+            <legend>Comentarios</legend>
+            <textarea name="co" id="co" cols="100%" rows="8%"></textarea>
+            <br>
+            <br>
+            <input type="button" id="enviar" value="Enviar">
+            <input type="button" id="borrar" value="Borrar">
+           
+          </fieldset>
+        </td>
+      </tr>
+    </form>
+  </table>
+
+</body>
+
+</html>
